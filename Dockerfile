@@ -7,6 +7,8 @@ RUN apt-get update && \
 
 RUN git clone -b manyuser https://github.com/breakwa11/shadowsocks.git
 
-RUN python shadowsocks/shadowsocks/server.py -p 8388 -k password -m rc4-md5 -o http_simple -d start
-
 RUN wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/finalspeed/master/install_fs.sh && bash install_fs.sh
+
+EXPOSE 8388 150
+
+CMD python shadowsocks/shadowsocks/server.py -p 8388 -k password -m rc4-md5 -o http_simple -d start && /etc/init.d/finalspeed start
